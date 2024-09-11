@@ -10,7 +10,7 @@ public class Usuario {
         this.email = email;
         this.nickname = nickname;
     }
-Override
+@Override
 public String toString(){
         return "Nome: " + nome;
 }
