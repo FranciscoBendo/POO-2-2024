@@ -1,0 +1,89 @@
+package heranca;
+class Animal{
+    void comer(){
+        System.out.println("Este animal está comendo");
+    }
+}
+
+class Cachorro extends Animal {
+    void latir(){
+        System.out.println("O cachorro está latindo");
+    }
+}
+
+class Gato extends Animal{
+    void miar(){
+        System.out.println("O gato está miando");
+    }
+}
+
+class Veiculo{
+    String marca;
+
+    public Veiculo(String marca){
+        this.marca = marca;
+    }
+
+    void exibirMarca(){
+        System.out.println("Marca: " + marca);
+    }
+}
+
+class Carro extends Veiculo{
+    int numeroDePortas;
+
+    public Carro(String marca, int numeroDePortas) {
+        super(marca);
+        this.numeroDePortas = numeroDePortas;
+    }
+
+    void exibirDetalhes(){
+        super.exibirMarca();
+        System.out.println("Número de portas: " + numeroDePortas);
+    }
+}
+
+class Pessoa{
+    String nome;
+
+    public Pessoa(String nome){
+        this.nome = nome;
+    }
+
+    void exibirNome(){
+        System.out.println("Nome: " + nome);
+    }
+}
+
+class Aluno extends Pessoa{
+    String escola;
+
+    public Aluno(String nome, String escola) {
+        super(nome);
+        this.escola = escola;
+    }
+
+    void exibirDetalhes(){
+        System.out.println("Nome: " + nome);
+        System.out.println("Instituição: " + escola);
+    }
+}
+
+public class Heranca {
+    public static void main(String[] args) {
+
+        Cachorro dog = new Cachorro();
+        dog.latir();
+        dog.comer();
+
+        Gato cat = new Gato();
+        cat.miar();
+        cat.comer();
+
+        Carro car = new Carro("Honda", 4);
+        car.exibirDetalhes();
+
+        Aluno estudante = new Aluno("Francisco", "UCB");
+        estudante.exibirDetalhes();
+    }
+}
