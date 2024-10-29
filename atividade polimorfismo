@@ -1,0 +1,38 @@
+import java.util.ArrayList;
+
+abstract class Pagamento {
+    abstract void processarPagamentos(double valor);
+}
+
+class CartaoCredito extends Pagamento{
+    @Override
+    void processarPagamentos(double valor) {
+        System.out.println("Verificando saldo... \nAprovada compra de " + valor);
+    }
+}
+
+class PayPal extends Pagamento{
+    @Override
+    void processarPagamentos(double valor) {
+        System.out.println("Autenticando o usuário... \nVerificada compra de " + valor);
+    }
+}
+
+class BoletoBancario extends Pagamento{
+    @Override
+    void processarPagamentos(double valor) {
+        System.out.println("Gerando boleto... \nO boleto tem o valor de " + valor + "e vence na data de xx/xx/xxxx");
+    }
+}
+
+public class Polimorfismo {
+    public static void main(String[] args) {
+        CartaoCredito cartao = new CartaoCredito();
+        PayPal paypal = new PayPal();
+        BoletoBancario boletobancario = new BoletoBancario();
+
+        cartao.processarPagamentos(15);
+        paypal.processarPagamentos(100);
+        boletobancario.processarPagamentos(1000);
+    }
+}
