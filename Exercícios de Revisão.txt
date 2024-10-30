@@ -1,0 +1,177 @@
+Exercício 1:
+
+class ContaBancaria {
+    private double saldo = 0;
+    private String Titular;
+    private int NumeroDaConta = 15;
+
+    void setTitular(String nome){
+        this.Titular = nome;
+    }
+
+    void getTitular(){
+        System.out.println(Titular);
+    }
+
+    void getNumeroDaConta(){
+        System.out.println(NumeroDaConta);
+    }
+
+    void depositarValor(double valor){
+        this.saldo += valor;
+    }
+
+    void sacarValor(double valor){
+        if(valor >= saldo){
+            saldo -= valor;
+        }else{
+            System.out.println("Saldo insuficiente");
+        }
+    }
+
+    void consultarSaldo(){
+        System.out.println(saldo);
+    }
+}
+
+public class Encapsulamento {
+    public static void main(String[] args) {
+        ContaBancaria contabancaria = new ContaBancaria();
+        contabancaria.setTitular("Francisco Nascimento Bendô");
+        contabancaria.depositarValor(100);
+
+        contabancaria.getTitular();
+        contabancaria.getNumeroDaConta();
+        contabancaria.consultarSaldo();
+
+        contabancaria.sacarValor(10);
+        contabancaria.consultarSaldo();
+    }
+}
+
+
+Exercício 2:
+
+class Calculadora {
+    int resultadoInt;
+    double resultadoDouble;
+    int resultadoLista = 0;
+
+    void somar(int x, int y){
+        this.resultadoInt = x + y;
+    }
+
+    void somar(double x, double y){
+        this.resultadoDouble = x + y;
+    }
+
+    void somar(int[] lista){
+        for(int i = 0; i < 2; i++){
+            this.resultadoLista += lista[i];
+        }
+    }
+}
+
+public class SobrecargaDeMetodos {
+    public static void main(String[] args) {
+        Calculadora calculadora = new Calculadora();
+
+        int[] numeros = new int[2];
+        numeros[0] = 10;
+        numeros[1] = 10;
+
+        calculadora.somar(10,10);
+        System.out.println(calculadora.resultadoInt);
+
+        calculadora.somar(10.0, 10.0);
+        System.out.println(calculadora.resultadoDouble);
+
+        calculadora.somar(numeros);
+        System.out.println(calculadora.resultadoLista);
+    }
+}
+
+
+Exercício 3:
+
+class Animal{
+    void comer(){
+        System.out.println("comendo...");
+    }
+
+    void dormir(){
+        System.out.println("dormindo...");
+    }
+}
+
+class Cachorro extends Animal{
+    void fazerSom(){
+        System.out.println("au au");
+    }
+}
+
+class Gato extends Animal{
+    void fazerSom(){
+        System.out.println("miau miau");
+    }
+}
+
+public class Heranca {
+    public static void main(String[] args) {
+        Cachorro dog = new Cachorro();
+        Gato cat = new Gato();
+
+        dog.comer();
+        dog.dormir();
+        dog.fazerSom();
+
+        cat.comer();
+        cat.dormir();
+        cat.fazerSom();
+    }
+}
+
+Exercício 4:
+
+
+abstract class Forma{
+    abstract void calcularArea(double r);
+    
+}
+
+class Circulo extends Forma{
+    double resultado;
+    @Override
+    void calcularArea(double r) {
+        this.resultado = (r * r) * 3.14;
+    }
+}
+
+class Retangulo extends Forma{
+    double resultado;
+    @Override
+    void calcularArea(double r) {
+        this.resultado = r * r;
+    }
+}
+
+public class ClasseAbstrata {
+    public static void main(String[] args){
+        Circulo circulo = new Circulo();
+        Retangulo retangulo = new Retangulo();
+
+        double raio = 2;
+        double lado = 2;
+
+        circulo.calcularArea(raio);
+        System.out.println(circulo.resultado);
+
+        retangulo.calcularArea(lado);
+        System.out.println(retangulo.resultado);
+
+    }
+}
+
+
+Exercício 5:
+
