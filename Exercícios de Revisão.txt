@@ -348,3 +348,105 @@ public class SistemaLocacaoVeiculos {
 
 Exercício 7:
 
+import java.util.ArrayList;
+import java.util.List;
+
+// Classe abstrata ItemBiblioteca
+abstract class ItemBiblioteca {
+    private String titulo;
+    private String autor;
+    private int anoPublicacao;
+
+    public ItemBiblioteca(String titulo, String autor, int anoPublicacao) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.anoPublicacao = anoPublicacao;
+    }
+
+    public abstract String getInfo();
+    
+    public String getTitulo() {
+        return titulo;
+    }
+}
+
+// Classe Livro que herda de ItemBiblioteca
+class Livro extends ItemBiblioteca {
+    private String generoLiterario;
+
+    public Livro(String titulo, String autor, int anoPublicacao, String generoLiterario) {
+        super(titulo, autor, anoPublicacao);
+        this.generoLiterario = generoLiterario;
+    }
+
+    @Override
+    public String getInfo() {
+        return "Livro: " + getTitulo() + ", Autor: " + autor + ", Ano: " + anoPublicacao + ", Gênero: " + generoLiterario;
+    }
+}
+
+// Classe Revista que herda de ItemBiblioteca
+class Revista extends ItemBiblioteca {
+    private int numeroDaEdicao;
+
+    public Revista(String titulo, String autor, int anoPublicacao, int numeroDaEdicao) {
+        super(titulo, autor, anoPublicacao);
+        this.numeroDaEdicao = numeroDaEdicao;
+    }
+
+    @Override
+    public String getInfo() {
+        return "Revista: " + getTitulo() + ", Autor: " + autor + ", Ano: " + anoPublicacao + ", Edição: " + numeroDaEdicao;
+    }
+}
+
+// Classe Usuario
+class Usuario {
+    private String nome;
+    private int idUsuario;
+    private List<ItemBiblioteca> itensEmprestados;
+
+    public Usuario(String nome, int idUsuario) {
+        this.nome = nome;
+        this.idUsuario = idUsuario;
+        this.itensEmprestados = new ArrayList<>();
+    }
+
+    public void emprestarItem(ItemBiblioteca item) {
+        itensEmprestados.add(item);
+        System.out.println("Item emprestado: " + item.getTitulo());
+    }
+
+    public void devolverItem(ItemBiblioteca item) {
+        if (itensEmprestados.remove(item)) {
+            System.out.println("Item devolvido: " + item.getTitulo());
+        } else {
+            System.out.println("O item não está emprestado.");
+        }
+    }
+
+    public void mostrarItensEmprestados() {
+        System.out.println("Itens emprestados por " + nome + ":");
+        for (ItemBiblioteca item : itensEmprestados) {
+            System.out.println(item.getInfo());
+        }
+    }
+}
+
+// Classe principal para teste
+public class SistemaBiblioteca {
+    public static void main(String[] args) {
+        Livro livro = new Livro("O Senhor dos Anéis", "J.R.R. Tolkien", 1954, "Fantasia");
+        Revista revista = new Revista("National Geographic", "Vários Autores", 2022, 101);
+
+        Usuario usuario = new Usuario("Maria Silva", 1);
+
+        usuario.emprestarItem(livro);
+        usuario.emprestarItem(revista);
+
+        usuario.mostrarItensEmprestados();
+
+        usuario.devolverItem(livro);
+        usuario.mostrarItensEmprestados();
+    }
+}
