@@ -236,3 +236,115 @@ public class Revisao {
 
 Exercício 6:
 
+import java.util.ArrayList;
+import java.util.List;
+
+abstract class Veiculo {
+    private String placa;
+    private String marca;
+    private String modelo;
+    private int ano;
+    private double precoPorDia;
+
+    public Veiculo(String placa, String marca, String modelo, int ano, double precoPorDia) {
+        this.placa = placa;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.ano = ano;
+        this.precoPorDia = precoPorDia;
+    }
+
+    public String getInfo() {
+        return "Placa: " + placa + ", Marca: " + marca + ", Modelo: " + modelo + ", Ano: " + ano + ", Preço por dia: " + precoPorDia;
+    }
+
+    public double calcularValorLocacao(int dias) {
+        return dias * precoPorDia;
+    }
+}
+
+class Carro extends Veiculo {
+    private int quantidadeDePortas;
+
+    public Carro(String placa, String marca, String modelo, int ano, double precoPorDia, int quantidadeDePortas) {
+        super(placa, marca, modelo, ano, precoPorDia);
+        this.quantidadeDePortas = quantidadeDePortas;
+    }
+
+    @Override
+    public double calcularValorLocacao(int dias) {
+        double valorTotal = super.calcularValorLocacao(dias);
+        if (dias > 7) {
+            valorTotal *= 0.95; // 5% de desconto
+        }
+        return valorTotal;
+    }
+
+    @Override
+    public String getInfo() {
+        return super.getInfo() + ", Quantidade de Portas: " + quantidadeDePortas;
+    }
+}
+
+class Moto extends Veiculo {
+    private int cilindrada;
+
+    public Moto(String placa, String marca, String modelo, int ano, double precoPorDia, int cilindrada) {
+        super(placa, marca, modelo, ano, precoPorDia);
+        this.cilindrada = cilindrada;
+    }
+
+    @Override
+    public double calcularValorLocacao(int dias) {
+        double valorTotal = super.calcularValorLocacao(dias);
+        valorTotal *= 1.10; // acréscimo de 10%
+        return valorTotal;
+    }
+
+    @Override
+    public String getInfo() {
+        return super.getInfo() + ", Cilindrada: " + cilindrada;
+    }
+}
+
+class Cliente {
+    private String nome;
+    private String cpf;
+    private List<String> historicoDeLocacoes;
+
+    public Cliente(String nome, String cpf) {
+        this.nome = nome;
+        this.cpf = cpf;
+        this.historicoDeLocacoes = new ArrayList<>();
+    }
+
+    public void alugarVeiculo(Veiculo veiculo, int dias) {
+        double valorLocacao = veiculo.calcularValorLocacao(dias);
+        historicoDeLocacoes.add(veiculo.getInfo() + ", Dias: " + dias + ", Valor: R$" + valorLocacao);
+        System.out.println("Veículo alugado: " + veiculo.getInfo() + ", Valor da locação: R$" + valorLocacao);
+    }
+
+    public void mostrarHistoricoDeLocacoes() {
+        System.out.println("Histórico de Locações de " + nome + ":");
+        for (String locacao : historicoDeLocacoes) {
+            System.out.println(locacao);
+        }
+    }
+}
+
+public class SistemaLocacaoVeiculos {
+    public static void main(String[] args) {
+        Carro carro = new Carro("ABC1234", "Toyota", "Corolla", 2020, 100, 4);
+        Moto moto = new Moto("XYZ5678", "Honda", "CB500", 2019, 80, 500);
+        
+        Cliente cliente = new Cliente("João Silva", "123.456.789-00");
+
+        cliente.alugarVeiculo(carro, 10);
+        cliente.alugarVeiculo(moto, 5);
+
+        cliente.mostrarHistoricoDeLocacoes();
+    }
+}
+
+Exercício 7:
+
