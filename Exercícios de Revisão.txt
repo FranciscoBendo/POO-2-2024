@@ -175,3 +175,64 @@ public class ClasseAbstrata {
 
 Exercício 5:
 
+package revisao3;
+import java.util.List;
+import java.util.ArrayList;
+
+abstract class Forma{
+    abstract double calcularArea(double valor);
+}
+
+class Circulo extends Forma{
+    double resultado;
+    @Override
+    double calcularArea(double r) {
+        this.resultado = (r * r) * 3.14;
+        return resultado;
+    }
+
+    @Override
+    public String toString() {
+        return "Área do Círculo: " + resultado;
+    }
+}
+
+class Retangulo extends Forma{
+    double resultado;
+    @Override
+    double calcularArea(double r) {
+        this.resultado = r * r;
+        return resultado;
+    }
+
+    @Override
+    public String toString() {
+        return "Área do Retângulo: " + resultado;
+    }
+}
+
+public class Revisao {
+    public static void main(String[] args) {
+
+        List<Forma> formas = new ArrayList<>();
+        Circulo circulo = new Circulo();
+        Retangulo retangulo = new Retangulo();
+
+        circulo.calcularArea(5);
+        retangulo.calcularArea(5);
+
+        formas.add(circulo);
+        formas.add(retangulo);
+
+        int i = 0;
+        while (i < 2){
+            System.out.println(formas.get(i));
+            i++;
+        }
+
+    }
+}
+
+
+Exercício 6:
+
